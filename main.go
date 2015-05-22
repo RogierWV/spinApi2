@@ -54,14 +54,14 @@ func GetArchivedSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.P
 }
 
 func GetArchivedSpinBatterij(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	rows,_ := conn.Query("SELECT batterij FROM spindata")
-	//data := []int{}
-	/*for rows.Next() {
-		spin := SpinData{}
-		rows.Scan(&spin.Id, &spin.Tijd, &spin.Mode, &spin.Hellingsgraad, &spin.Snelheid, &spin.Batterij, &spin.BallonCount)
-		data = append(data, spin)
-	}*/
-	buf,_ := json.Marshal(rows)
+	rows,_ := conn.Query("SELECT UNNEST(batterij) FROM spindata")
+	data := make([]int64, 0)
+	var scanInt int64
+	for rows.Next() {
+		rows.Scan(&scanInt)
+		data = append(data, scanInt)
+	}
+	buf,_ := json.Marshal(data)
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(buf)
