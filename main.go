@@ -15,13 +15,13 @@ import (
 var conn *sql.DB
 
 type BlogPost struct {
-	Id int64
-	Titel string
-	Text string
-	Auteur string
-	Img_url string
-	Ctime time.Time
-	Image string
+	Id int64 `json:"id"`
+	Titel string `json:"titel"`
+	Text string `json:"text"`
+	Auteur string `json:"auteur"`
+	Img_url string `json:"img_url"`
+	Ctime time.Time `json:"ctime"`
+	Image string `json:"image"`
 }
 
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
