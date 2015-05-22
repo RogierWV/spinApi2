@@ -1,6 +1,7 @@
 package main
 
 import (
+	"time"
 	"encoding/json"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
@@ -19,7 +20,7 @@ type BlogPost struct {
 	Text string
 	Auteur string
 	Img_url string
-	Ctime string
+	Ctime time.Time
 	Image string
 }
 
