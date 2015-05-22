@@ -24,6 +24,8 @@ func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		data = append(data, post)
 	}
 	buf,_ := json.Marshal(data)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(buf)
 }
 
@@ -32,6 +34,8 @@ func GetLatestSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Par
 	spin := SpinData{}
 	rows.Scan(&spin.Id, &spin.Tijd, &spin.Mode, &spin.Hellingsgraad, &spin.Snelheid, &spin.Batterij, &spin.BallonCount)
 	buf,_ := json.Marshal(spin)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(buf)
 }
 
@@ -44,6 +48,8 @@ func GetArchivedSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.P
 		data = append(data, spin)
 	}
 	buf,_ := json.Marshal(data)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(buf)
 }
 
@@ -52,6 +58,8 @@ func GetLatestServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Pa
 	servo := ServoData{}
 	rows.Scan(&servo.Id, &servo.ServoId, &servo.Tijd, &servo.Voltage, &servo.Positie, &servo.Load, &servo.Temperatuur)
 	buf,_ := json.Marshal(servo)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(buf)
 }
 
@@ -64,6 +72,8 @@ func GetArchivedServoData(w http.ResponseWriter, r *http.Request, ps httprouter.
 		data = append(data, servo)
 	}
 	buf,_ := json.Marshal(data)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
 	w.Write(buf)
 }
 
@@ -121,10 +131,15 @@ func GetImg(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	http.ServeFile(w,r,"./img/"+ps.ByName("file"))
 }
 
+func GetDoc(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	
+}
+
 func main() {
 	conn,_ = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	defer conn.Close()
 	router := httprouter.New()
+	router.GET("/", GetDoc)
 	router.GET("/blog", GetBlog)
 	router.GET("/spin/latest", GetLatestSpinData)
 	router.GET("/spin/archive", GetArchivedSpinData)
