@@ -55,8 +55,8 @@ func GetArchivedSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.P
 
 func GetArchivedSpinBatterij(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows,_ := conn.Query("SELECT UNNEST(batterij) FROM spindata")
-	data := make([]int64, 0)
-	var scanInt int64
+	data := make([]int, 0)
+	var scanInt int
 	for rows.Next() {
 		rows.Scan(&scanInt)
 		data = append(data, scanInt)
