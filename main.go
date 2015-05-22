@@ -13,10 +13,26 @@ import (
 
 var conn *sql.DB
 
+type BlogPost {
+	Id int64
+	Titel string
+	Text string
+	Auteur string
+	Img_url string
+	Ctime string
+	Image string
+}
+
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	pgdata,_ := conn.Query("SELECT * FROM blog")
-	//data,_ := json.Marshal(pgdata)
-	w.Write(pgdata)
+	rows,_ := conn.Query("SELECT * FROM blog")
+	data := []BlogPost{}
+	for rows.Next() {
+		post := BlogPost{}
+		rows.Scan(&post.Id, &post.Titel, &post.Text, &post.Auteur, &post.Img_url, &post.Ctime, &post.Image)
+		data = append(data, post)
+	}
+	buf,_ := json.Marshal(data)
+	w.Write(buf)
 }
 
 func GetSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -46,6 +62,7 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 
 func main() {
 	conn,_ = sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	defer conn.Close()
 	router := httprouter.New()
 	router.GET("/blog", GetBlog)
 	router.GET("/spin", GetSpinData)
