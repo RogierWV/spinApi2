@@ -11,7 +11,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var conn DB
+var conn sql.DB
 
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	data,_ := json.Marshal("blah")
@@ -44,7 +44,7 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 }
 
 func main() {
-	conn, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	conn,_ := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	router := httprouter.New()
 	router.GET("/blog", GetBlog)
 	router.GET("/spin", GetSpinData)
