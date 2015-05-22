@@ -119,7 +119,7 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 }
 
 func TeaPot(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	w.WriteHead(418)
+	http.Error(w, http.StatusText(418), 418)
 }
 
 func main() {
