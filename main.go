@@ -44,7 +44,7 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 }
 
 func main() {
-	conn,_ := sql.Open("postgres", os.Getenv("DATABASE_URL"))
+	conn,_ = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	router := httprouter.New()
 	router.GET("/blog", GetBlog)
 	router.GET("/spin", GetSpinData)
