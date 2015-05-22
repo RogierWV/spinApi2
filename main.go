@@ -1,7 +1,7 @@
 package main
 
 import (
-	//"encoding/json"
+	"encoding/json"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 	"log"
@@ -13,27 +13,33 @@ import (
 
 
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	w.Write([]byte("blah"))
+	data,err := json.Marshal("blah")
+	w.Write(data)
 }
 
 func GetSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	w.Write([]byte("blah"))
+	data,err := json.Marshal("blah")
+	w.Write(data)
 }
 
 func GetServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	w.Write([]byte("blah"))
+	data,err := json.Marshal("blah")
+	w.Write(data)
 }
 
 func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	w.Write([]byte("blah"))
+	data,err := json.Marshal("blah")
+	w.Write(data)
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	w.Write([]byte("blah"))
+	data,err := json.Marshal("blah")
+	w.Write(data)
 }
 
 func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	w.Write([]byte("blah"))
+	data,err := json.Marshal("blah")
+	w.Write(data)
 }
 
 func main() {
