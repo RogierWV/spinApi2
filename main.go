@@ -14,7 +14,8 @@ import (
 var conn *sql.DB
 
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,_ := json.Marshal("blah")
+	pgdata,_ := conn.Query("SELECT * FROM blog")
+	data,_ := json.Marshal(pgdata)
 	w.Write(data)
 }
 
