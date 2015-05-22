@@ -56,7 +56,15 @@ func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.Write(buf)
 }
 
-func GetSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+func GetLatestSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	rows,_ := conn.Query("SELECT * FROM spindata ORDER BY tijd DESC LIMIT 1")
+	spin := SpinData{}
+	rows.Scan(&spin.Id, &spin.Tijd, &spin.Mode, &spin.Hellingsgraad, &spin.Snelheid, &spin.Batterij, &spin.BallonCount)
+	buf,_ := json.Marshal(spin)
+	w.Write(buf)
+}
+
+func GetArchivedSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows,_ := conn.Query("SELECT * FROM spindata")
 	data := []SpinData{}
 	for rows.Next() {
@@ -68,14 +76,36 @@ func GetSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.Write(buf)
 }
 
-func GetServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,_ := json.Marshal("blah")
-	w.Write(data)
+func GetLatestServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	rows,_ := conn.Query("SELECT * FROM servodata ORDER BY tijd DESC LIMIT 1")
+	servo := ServoData{}
+	rows.Scan(&servo.Id, &servo.ServoId, &servo.Tijd, &servo.Voltage, &servo.Positie, &servo.Load, &servo.Temperatuur)
+	buf,_ := json.Marshal(servo)
+	w.Write(buf)
+}
+
+func GetArchivedServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	rows,_ := conn.Query("SELECT * FROM servodata")
+	data := []ServoData{}
+	for rows.Next() {
+		servo := ServoData{}
+		rows.Scan(&servo.Id, &servo.ServoId, &servo.Tijd, &servo.Voltage, &servo.Positie, &servo.Load, &servo.Temperatuur)
+		data = append(data, servo)
+	}
+	buf,_ := json.Marshal(data)
+	w.Write(buf)
 }
 
 func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,_ := json.Marshal("blah")
-	w.Write(data)
+
+	/*_,err := db.Query("INSERT INTO blog (titel, text, auteur, ctime, image) VALUES ($1, $2, $3, $4, $5)", )
+	if err != nil {
+		w.WriteHead(500)
+		w.Write([]byte("error posting"))
+		return
+	}
+	w.WriteHead(201)
+	w.Write([]byte("successful"))*/
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -88,13 +118,20 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 	w.Write(data)
 }
 
+func TeaPot(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	w.WriteHead(418)
+}
+
 func main() {
 	conn,_ = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	defer conn.Close()
 	router := httprouter.New()
 	router.GET("/blog", GetBlog)
-	router.GET("/spin", GetSpinData)
-	router.GET("/servo", GetServoData)
+	router.GET("/spin/latest", GetLatestSpinData)
+	router.GET("/spin/archive", GetArchivedSpinData)
+	router.GET("/servo/latest", GetLatestServoData)
+	router.GET("/servo/archive", GetArchivedServoData)
+	router.GET("/teapot", TeaPot)
 	router.POST("/blog", PostBlog)
 	router.POST("/spin", PostSpinData)
 	router.POST("/servo", PostServoData)
