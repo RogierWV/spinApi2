@@ -24,6 +24,26 @@ type BlogPost struct {
 	Image string `json:"image"`
 }
 
+type SpinData struct {
+	Id int64 `json:"id"`
+	Tijd time.Time `json:"tijd"`
+	Mode string `json:"mode"`
+	Hellingsgraad int64 `json:"hellingsgraad"`
+	Snelheid int64 `json:"snelheid"`
+	Batterij int64 `json:"batterij"`
+	BallonCount int64 `json:"ballonCount"`
+}
+
+type ServoData struct {
+	Id int64 `json:"id"`
+	ServoId int64 `json:"servo_id"`
+	Tijd time.Time `json:"tijd"`
+	Voltage int64 `json:"voltage"`
+	Positie int64 `json:"positie"`
+	Load int64 `json:"load"`
+	Temperatuur int64 `json:"temperatuur"`
+}
+
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows,_ := conn.Query("SELECT * FROM blog")
 	data := []BlogPost{}
@@ -37,8 +57,15 @@ func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func GetSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,_ := json.Marshal("blah")
-	w.Write(data)
+	rows,_ := conn.Query("SELECT * FROM spindata")
+	data := []SpinData{}
+	for rows.Next() {
+		spin := SpinData{}
+		rows.Scan(&spin.Id, &spin.Tijd, &spin.Mode, &spin.Hellingsgraad, &spin.Snelheid, &spin.Batterij, &spin.BallonCount)
+		data = append(data, spin)
+	}
+	buf,_ := json.Marshal(data)
+	w.Write(buf)
 }
 
 func GetServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
