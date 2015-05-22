@@ -62,7 +62,7 @@ func GetArchivedSpinBatterij(w http.ResponseWriter, r *http.Request, ps httprout
 		data = append(data, scanInt)
 	}
 	buf,_ := json.Marshal(data)
-	fmt.Printf(buf)
+	fmt.Printf(string(buf))
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(buf)
