@@ -53,6 +53,20 @@ func GetArchivedSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.P
 	w.Write(buf)
 }
 
+func GetArchivedSpinBatterij(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	rows,_ := conn.Query("SELECT batterij FROM spindata")
+	//data := []int{}
+	/*for rows.Next() {
+		spin := SpinData{}
+		rows.Scan(&spin.Id, &spin.Tijd, &spin.Mode, &spin.Hellingsgraad, &spin.Snelheid, &spin.Batterij, &spin.BallonCount)
+		data = append(data, spin)
+	}*/
+	buf,_ := json.Marshal(rows)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(buf)
+}
+
 func GetLatestServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows,_ := conn.Query("SELECT * FROM servodata ORDER BY tijd DESC LIMIT 1")
 	servo := ServoData{}
@@ -104,7 +118,7 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	_,err := conn.Query("INSERT INTO spindata (tijd, mode, hellingsgraad, snelheid, batterij, ballonCount) VALUES ($1, $2, $3, $4, $5, $6)", time.Now(), 
+	_,err := conn.Query("INSERT INTO spindata (tijd, mode, hellingsgraad, snelheid, batterij, balloncount) VALUES ($1, $2, $3, $4, $5, $6)", time.Now(), 
 		r.FormValue("mode"), r.FormValue("hellingsgraad"), r.FormValue("snelheid"), r.FormValue("batterij"), r.FormValue("ballonCount"))
 	if err != nil {
 		w.WriteHeader(500)
@@ -143,6 +157,7 @@ func main() {
 	router.GET("/blog", GetBlog)
 	router.GET("/spin/latest", GetLatestSpinData)
 	router.GET("/spin/archive", GetArchivedSpinData)
+	router.GET("/spin/archive/batterij", GetArchivedSpinBatterij)
 	router.GET("/servo/latest", GetLatestServoData)
 	router.GET("/servo/archive", GetArchivedServoData)
 	router.GET("/img/*file", GetImg)
