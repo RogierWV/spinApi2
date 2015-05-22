@@ -7,42 +7,13 @@ import (
 	"net/http"
 	"log"
 	"os"
+	"io"
 	"fmt"
 	"database/sql"
 	_ "github.com/lib/pq"
 )
 
 var conn *sql.DB
-
-type BlogPost struct {
-	Id int64 `json:"id"`
-	Titel string `json:"titel"`
-	Text string `json:"text"`
-	Auteur string `json:"auteur"`
-	Img_url string `json:"img_url"`
-	Ctime time.Time `json:"ctime"`
-	Image string `json:"image"`
-}
-
-type SpinData struct {
-	Id int64 `json:"id"`
-	Tijd time.Time `json:"tijd"`
-	Mode string `json:"mode"`
-	Hellingsgraad int64 `json:"hellingsgraad"`
-	Snelheid int64 `json:"snelheid"`
-	Batterij int64 `json:"batterij"`
-	BallonCount int64 `json:"ballonCount"`
-}
-
-type ServoData struct {
-	Id int64 `json:"id"`
-	ServoId int64 `json:"servo_id"`
-	Tijd time.Time `json:"tijd"`
-	Voltage int64 `json:"voltage"`
-	Positie int64 `json:"positie"`
-	Load int64 `json:"load"`
-	Temperatuur int64 `json:"temperatuur"`
-}
 
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows,_ := conn.Query("SELECT * FROM blog")
@@ -97,29 +68,57 @@ func GetArchivedServoData(w http.ResponseWriter, r *http.Request, ps httprouter.
 }
 
 func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-
-	/*_,err := db.Query("INSERT INTO blog (titel, text, auteur, ctime, image) VALUES ($1, $2, $3, $4, $5)", )
+	r.ParseMultipartForm(32 << 20)
+	file, handler, err := r.FormFile("uploadfile")
 	if err != nil {
-		w.WriteHead(500)
+		w.WriteHeader(500)
+		return
+	}
+	defer file.Close()
+	fmt.Fprintf(w, "%v", handler.Header)
+	f, err := os.OpenFile("./img/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+	if err != nil {
+		w.WriteHeader(500)
+		return
+	}
+	defer f.Close()
+	io.Copy(f, file)
+	_,err = conn.Query("INSERT INTO blog (titel, text, auteur, ctime, image) VALUES ($1, $2, $3, $4, $5)", r.FormValue("titel"), r.FormValue("text"), r.FormValue("auteur"), time.Now(), "http://idp-api.herokuapp.com/img/"+handler.Filename)
+	if err != nil {
+		w.WriteHeader(500)
 		w.Write([]byte("error posting"))
 		return
 	}
-	w.WriteHead(201)
-	w.Write([]byte("successful"))*/
+	w.WriteHeader(201)
+	w.Write([]byte("successful"))
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,_ := json.Marshal("blah")
-	w.Write(data)
+	_,err := conn.Query("INSERT INTO spindata (tijd, mode, hellingsgraad, snelheid, batterij, ballonCount) VALUES ($1, $2, $3, $4, $5, $6)", time.Now(), 
+		r.FormValue("mode"), r.FormValue("hellingsgraad"), r.FormValue("snelheid"), r.FormValue("batterij"), r.FormValue("ballonCount"))
+	if err != nil {
+		w.WriteHeader(500)
+		w.Write([]byte("error posting"))
+		return
+	}
+	w.WriteHeader(201)
+	w.Write([]byte("successful"))
 }
 
 func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,_ := json.Marshal("blah")
-	w.Write(data)
+	_,err := conn.Query("INSERT INTO servodata (servo_id, tijd, voltage, positie, load, temperatuur) VALUES ($1, $2, $3, $4, $5, $6)", 
+		r.FormValue("servo_id"), time.Now(), r.FormValue("voltage"), r.FormValue("positie"), r.FormValue("load"), r.FormValue("Temperatuur"))
+	if err != nil {
+		w.WriteHeader(500)
+		w.Write([]byte("error posting"))
+		return
+	}
+	w.WriteHeader(201)
+	w.Write([]byte("successful"))
 }
 
-func TeaPot(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	http.Error(w, http.StatusText(418), 418)
+func GetImg(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	http.ServeFile(w,r,"./img/"+ps.ByName("file"))
 }
 
 func main() {
@@ -131,7 +130,7 @@ func main() {
 	router.GET("/spin/archive", GetArchivedSpinData)
 	router.GET("/servo/latest", GetLatestServoData)
 	router.GET("/servo/archive", GetArchivedServoData)
-	router.GET("/teapot", TeaPot)
+	router.GET("/img/*file", GetImg)
 	router.POST("/blog", PostBlog)
 	router.POST("/spin", PostSpinData)
 	router.POST("/servo", PostServoData)
