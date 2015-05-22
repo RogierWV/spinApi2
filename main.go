@@ -13,7 +13,7 @@ import (
 
 var conn *sql.DB
 
-type BlogPost {
+type BlogPost struct {
 	Id int64
 	Titel string
 	Text string
