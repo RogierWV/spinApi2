@@ -15,13 +15,13 @@ import (
 var conn *sql.DB
 
 type BlogPost struct {
-	Id int64
-	Titel string
-	Text string
-	Auteur string
-	Img_url string
-	Ctime time.Time
-	Image string
+	id int64
+	titel string
+	text string
+	auteur string
+	img_url string
+	ctime time.Time
+	image string
 }
 
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -29,7 +29,7 @@ func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	data := []BlogPost{}
 	for rows.Next() {
 		post := BlogPost{}
-		rows.Scan(&post.Id, &post.Titel, &post.Text, &post.Auteur, &post.Img_url, &post.Ctime, &post.Image)
+		rows.Scan(&post.id, &post.titel, &post.text, &post.auteur, &post.img_url, &post.ctime, &post.image)
 		data = append(data, post)
 	}
 	buf,_ := json.Marshal(data)
