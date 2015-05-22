@@ -108,7 +108,7 @@ func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 		r.FormValue("mode"), r.FormValue("hellingsgraad"), r.FormValue("snelheid"), r.FormValue("batterij"), r.FormValue("ballonCount"))
 	if err != nil {
 		w.WriteHeader(500)
-		w.Write([]byte("error posting"))
+		w.Write([]byte(err))
 		return
 	}
 	w.WriteHeader(201)
@@ -120,7 +120,7 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 		r.FormValue("servo_id"), time.Now(), r.FormValue("voltage"), r.FormValue("positie"), r.FormValue("load"), r.FormValue("Temperatuur"))
 	if err != nil {
 		w.WriteHeader(500)
-		w.Write([]byte("error posting"))
+		w.Write([]byte(err))
 		return
 	}
 	w.WriteHeader(201)
