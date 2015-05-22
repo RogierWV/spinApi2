@@ -7,10 +7,11 @@ import (
 	"log"
 	"os"
 	"fmt"
-	//"database/sql"
-	//"github.com/lib/pq"
+	"database/sql"
+	_ "github.com/lib/pq"
 )
 
+var conn DB
 
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	data,_ := json.Marshal("blah")
@@ -43,6 +44,7 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 }
 
 func main() {
+	conn, err := sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	router := httprouter.New()
 	router.GET("/blog", GetBlog)
 	router.GET("/spin", GetSpinData)
