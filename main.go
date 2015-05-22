@@ -15,8 +15,8 @@ var conn *sql.DB
 
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	pgdata,_ := conn.Query("SELECT * FROM blog")
-	data,_ := json.Marshal(pgdata)
-	w.Write(data)
+	//data,_ := json.Marshal(pgdata)
+	w.Write(pgdata)
 }
 
 func GetSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
