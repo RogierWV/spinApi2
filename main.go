@@ -11,7 +11,7 @@ import (
 	_ "github.com/lib/pq"
 )
 
-var conn sql.DB
+var conn *sql.DB
 
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	data,_ := json.Marshal("blah")
