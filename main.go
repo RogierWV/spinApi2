@@ -132,7 +132,7 @@ func GetImg(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func GetDoc(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	
+	http.ServeFile(w,r,"./doc.html")
 }
 
 func main() {
