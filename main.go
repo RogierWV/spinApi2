@@ -1,0 +1,53 @@
+package main
+
+import (
+	//"encoding/json"
+	"github.com/julienschmidt/httprouter"
+	"net/http"
+	"log"
+	"os"
+	"fmt"
+	//"database/sql"
+	//"github.com/lib/pq"
+)
+
+
+func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	w.Write([]byte("blah"))
+}
+
+func GetSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	w.Write([]byte("blah"))
+}
+
+func GetServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	w.Write([]byte("blah"))
+}
+
+func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	w.Write([]byte("blah"))
+}
+
+func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	w.Write([]byte("blah"))
+}
+
+func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	w.Write([]byte("blah"))
+}
+
+func main() {
+	router := httprouter.New()
+	router.GET("/blog", GetBlog)
+	router.GET("/spin", GetSpinData)
+	router.GET("/servo", GetServoData)
+	router.POST("/blog", PostBlog)
+	router.POST("/spin", PostSpinData)
+	router.POST("/servo", PostServoData)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+	fmt.Printf("Starting server at localhost:%s...", port)
+	log.Fatal(http.ListenAndServe(":"+port, router))
+}
