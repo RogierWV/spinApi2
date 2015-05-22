@@ -13,32 +13,32 @@ import (
 
 
 func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,err := json.Marshal("blah")
+	data,_ := json.Marshal("blah")
 	w.Write(data)
 }
 
 func GetSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,err := json.Marshal("blah")
+	data,_ := json.Marshal("blah")
 	w.Write(data)
 }
 
 func GetServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,err := json.Marshal("blah")
+	data,_ := json.Marshal("blah")
 	w.Write(data)
 }
 
 func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,err := json.Marshal("blah")
+	data,_ := json.Marshal("blah")
 	w.Write(data)
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,err := json.Marshal("blah")
+	data,_ := json.Marshal("blah")
 	w.Write(data)
 }
 
 func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	data,err := json.Marshal("blah")
+	data,_ := json.Marshal("blah")
 	w.Write(data)
 }
 
