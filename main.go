@@ -155,9 +155,9 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 	w.Write([]byte("successful"))
 }
 
-func GetDoc(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+/*func GetDoc(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	http.ServeFile(w,r,"./static/doc.html")
-}
+}*/
 
 func Static(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	http.ServeFile(w,r,"./static/"+ps.ByName("file"))
@@ -167,15 +167,14 @@ func main() {
 	conn,_ = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	defer conn.Close()
 	router := httprouter.New()
-	router.GET("/api", GetDoc)
-	router.GET("/api/blog", GetBlog)
-	router.GET("/api/spin/latest", GetLatestSpinData)
-	router.GET("/api/spin/archive", GetArchivedSpinData)
-	router.GET("/api/spin/archive/batterij", GetArchivedSpinBatterij)
-	router.GET("/api/spin/archive/mode", GetArchivedSpinMode)
-	router.GET("/api/servo/latest", GetLatestServoData)
-	router.GET("/api/servo/archive", GetArchivedServoData)
-	router.GET("/*file", Static)
+	//router.GET("/", GetDoc)
+	router.GET("/blog", GetBlog)
+	router.GET("/spin/latest", GetLatestSpinData)
+	router.GET("/spin/archive", GetArchivedSpinData)
+	router.GET("/spin/archive/batterij", GetArchivedSpinBatterij)
+	router.GET("/spin/archive/mode", GetArchivedSpinMode)
+	router.GET("/servo/latest", GetLatestServoData)
+	router.GET("/servo/archive", GetArchivedServoData)
 	router.POST("/blog", PostBlog)
 	router.POST("/spin", PostSpinData)
 	router.POST("/servo", PostServoData)
