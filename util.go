@@ -33,7 +33,3 @@ type ServoData struct {
 	Load int64 `json:"load"`
 	Temperatuur int64 `json:"temperatuur"`
 }
-
-type Batterij struct {
-	data []int64 `json:"data"`
-}
