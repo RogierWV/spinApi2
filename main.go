@@ -40,7 +40,7 @@ func GetPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	buf,_ := json.Marshal(data)
 	SetHeaders(&w)
 	w.Write(buf)
-	w.Write(ps.ByName("id"))
+	w.Write([]byte(ps.ByName("id")))
 }
 
 func GetLatestSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
