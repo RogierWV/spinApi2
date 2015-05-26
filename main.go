@@ -69,6 +69,20 @@ func GetArchivedSpinBatterij(w http.ResponseWriter, r *http.Request, ps httprout
 	w.Write(buf)
 }
 
+func GetArchivedSpinMode(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	rows,_ := conn.Query("SELECT mode FROM spindata")
+	data := make([]string, 0)
+	var scanStr string
+	for rows.Next() {
+		rows.Scan(&scanStr)
+		data = append(data, scanStr)
+	}
+	buf,_ := json.Marshal(data)
+	fmt.Printf(string(buf))
+	SetHeaders(&w)
+	w.Write(buf)
+}
+
 func GetLatestServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows,_ := conn.Query("SELECT * FROM servodata ORDER BY tijd DESC LIMIT 1")
 	servo := ServoData{}
@@ -158,6 +172,7 @@ func main() {
 	router.GET("/spin/latest", GetLatestSpinData)
 	router.GET("/spin/archive", GetArchivedSpinData)
 	router.GET("/spin/archive/batterij", GetArchivedSpinBatterij)
+	router.GET("/spin/archive/mode", GetArchivedSpinMode)
 	router.GET("/servo/latest", GetLatestServoData)
 	router.GET("/servo/archive", GetArchivedServoData)
 	router.GET("/img/*file", GetImg)
