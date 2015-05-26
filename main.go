@@ -34,13 +34,12 @@ func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func GetPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	rows,_ := conn.Query("SELECT * FROM blog WHERE id = $1", ps.ByName("id"))
+	rows,_ := conn.Query("SELECT * FROM blog WHERE id = " + ps.ByName("id"))
 	data := BlogPost{}
 	rows.Scan(&data.Id, &data.Titel, &data.Text, &data.Auteur, &data.Img_url, &data.Ctime, &data.Image)
 	buf,_ := json.Marshal(data)
 	SetHeaders(&w)
 	w.Write(buf)
-	w.Write([]byte(ps.ByName("id")))
 }
 
 func GetLatestSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
