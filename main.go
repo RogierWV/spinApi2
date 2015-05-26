@@ -33,6 +33,15 @@ func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.Write(buf)
 }
 
+func GetPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	rows,_ := conn.Query("SELECT * FROM blog WHERE id = $1", ps.ByName("id"))
+	data := BlogPost{}
+	rows.Scan(&data.Id, &data.Titel, &data.Text, &data.Auteur, &data.Img_url, &data.Ctime, &data.Image)
+	buf,_ := json.Marshal(data)
+	SetHeaders(&w)
+	w.Write(buf)
+}
+
 func GetLatestSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows,_ := conn.Query("SELECT * FROM spindata ORDER BY tijd DESC LIMIT 1")
 	spin := SpinData{}
@@ -172,6 +181,7 @@ func main() {
 	router := httprouter.New()
 	//router.GET("/", GetDoc)
 	router.GET("/blog", GetBlog)
+	router.GET("/blog/:id", GetPost)
 	router.GET("/spin/latest", GetLatestSpinData)
 	router.GET("/spin/archive", GetArchivedSpinData)
 	router.GET("/spin/archive/batterij", GetArchivedSpinBatterij)
