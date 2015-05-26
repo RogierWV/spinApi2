@@ -106,22 +106,23 @@ func GetArchivedServoData(w http.ResponseWriter, r *http.Request, ps httprouter.
 }
 
 func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	r.ParseMultipartForm(32 << 20)
-	file, handler, err := r.FormFile("uploadfile")
-	if err != nil {
-		w.WriteHeader(500)
-		return
-	}
+	//r.ParseMultipartForm(32 << 20)
+	/*file, handler, err := r.FormFile("uploadfile")
 	defer file.Close()
-	fmt.Fprintf(w, "%v", handler.Header)
-	f, err := os.OpenFile("./img/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
-	if err != nil {
-		w.WriteHeader(500)
-		return
+	if err == nil {
+		fmt.Fprintf(w, "%v", handler.Header)
+		f, err := os.OpenFile("./img/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0666)
+		if err != nil {
+			w.WriteHeader(500)
+			return
+		}
+		defer f.Close()
+		io.Copy(f, file)
 	}
-	defer f.Close()
-	io.Copy(f, file)
-	_,err = conn.Query("INSERT INTO blog (titel, text, auteur, ctime, image) VALUES ($1, $2, $3, $4, $5)", r.FormValue("titel"), r.FormValue("text"), r.FormValue("auteur"), time.Now(), "http://idp-api.herokuapp.com/img/"+handler.Filename)
+
+	err = nil*/
+
+	_,err := conn.Query("INSERT INTO blog (titel, text, auteur, ctime, image) VALUES ($1, $2, $3, $4, $5)", r.FormValue("titel"), r.FormValue("text"), r.FormValue("auteur"), time.Now(), "http://idp-api.herokuapp.com/img/"+handler.Filename)
 	if err != nil {
 		w.WriteHeader(500)
 		w.Write([]byte("error posting"))
