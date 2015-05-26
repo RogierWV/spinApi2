@@ -9,7 +9,7 @@ CREATE TABLE "blog" (
     "titel" varchar(510) NOT NULL,
     "text" text NOT NULL,
     "auteur" varchar(510) NOT NULL,
-    "img_url" varchar(510) NOT NULL,
+    "img_url" varchar(510) DEFAULT NULL,
     "ctime" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "image" varchar(510) DEFAULT NULL,
     PRIMARY KEY ("id")

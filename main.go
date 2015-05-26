@@ -130,7 +130,8 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		return
 	}
 	w.WriteHeader(201)
-	w.Write([]byte("successful"))
+	w.Header().Set("Content-Type", "text/html")
+	w.Write([]byte("<meta http-equiv=\"refresh\" content=\"5; url=http://knightspider.herokuapp.com/#/blog\">successful"))
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
