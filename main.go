@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"log"
 	"os"
-	"io"
+	//"io"
 	"fmt"
 	"database/sql"
 	_ "github.com/lib/pq"
