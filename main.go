@@ -155,8 +155,8 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 	w.Write([]byte("successful"))
 }
 
-func GetImg(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	http.ServeFile(w,r,"./img/"+ps.ByName("file"))
+func GetDoc(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	http.ServeFile(w,r,"./static/doc.html")
 }
 
 func Static(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
