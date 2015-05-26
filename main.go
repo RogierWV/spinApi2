@@ -53,6 +53,26 @@ func GetLatestSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Par
 	w.Write(buf)
 }
 
+func GetLatestSpinBatterij(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	rows,_ := conn.Query("SELECT batterij FROM spindata ORDER BY tijd DESC LIMIT 1")
+	var data int 
+	rows.Next()
+	rows.Scan(&data)
+	buf,_ := json.Marshal(data)
+	SetHeaders(&w)
+	w.Write(buf)
+}
+
+func GetLatestSpinMode(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	rows,_ := conn.Query("SELECT mode FROM spindata ORDER BY tijd DESC LIMIT 1")
+	var data string 
+	rows.Next()
+	rows.Scan(&data)
+	buf,_ := json.Marshal(data)
+	SetHeaders(&w)
+	w.Write(buf)
+}
+
 func GetArchivedSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows,_ := conn.Query("SELECT * FROM spindata")
 	data := []SpinData{}
@@ -186,6 +206,8 @@ func main() {
 	router.GET("/blog", GetBlog)
 	router.GET("/blog/:id", GetPost)
 	router.GET("/spin/latest", GetLatestSpinData)
+	router.GET("/spin/latest/batterij", GetLatestSpinBatterij)
+	router.GET("/spin/latest/mode", GetLatestSpinMode)
 	router.GET("/spin/archive", GetArchivedSpinData)
 	router.GET("/spin/archive/batterij", GetArchivedSpinBatterij)
 	router.GET("/spin/archive/mode", GetArchivedSpinMode)
