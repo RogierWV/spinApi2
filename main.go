@@ -126,7 +126,7 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	_,err := conn.Query("INSERT INTO blog (titel, text, auteur, ctime) VALUES ($1, $2, $3, $4)", r.FormValue("titel"), r.FormValue("text"), r.FormValue("auteur"), time.Now())
 	if err != nil {
 		w.WriteHeader(500)
-		w.Write([]byte("error posting"))
+		w.Write([]byte(err.Error()))
 		return
 	}
 	w.WriteHeader(201)
