@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="js/ui-bootstrap-tpls-0.12.1.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"></link>
+    <meta charset="UTF-8">
+    <title></title>
+	<style>
+		body{
+			    border-left: 3px solid #CCC;
+			
+			    border-top: 3px solid #CCC;
+		}
+		.webb{
+
+		}
+		.webb:after{
+			position: absolute;
+		    content: '';
+		    top: 0px;
+		    left: 0px;
+		    height: 100%;
+		    width: 100%;
+		    border-left: 2px solid #CCC;
+		    border-top: 2px solid #CCC;
+		    -webkit-transform: skewY(30deg) skew(30deg);
+		    -moz-transform: skewY(30deg) skew(30deg);
+		    transform: skewY(30deg) skew(30deg);
+		    -webkit-transform-origin: left top;
+		    -moz-transform-origin: left top;
+		    transform-origin: left top;
+		}
+		.webb:before{
+		    position: absolute;
+		    content: '';
+		    top: 0px;
+		    left: 0px;
+		    height: 30px;
+		    width: 36px;
+		    border-radius: 50%;
+		    border-top: 2px solid #CCC;
+		    -webkit-transform: translate(20px, 26px) rotate(-45deg);
+		    -moz-transform: translate(20px, 26px) rotate(-45deg);
+		    transform: translate(20px, 26px) rotate(-45deg);
+			 box-shadow: -35px -2px 0px black, -35px -4px 0px #CCC,35px -1px 0px black, 34px -3px 0px #CCC, -4px 56px 0px 16px black, -4px 53px 0px 15px #CCC, -65px 56px 0px 16px black, -65px 53px 0px 15px #CCC, -4px 53px 0px 15px #CCC, 62px 56px 0px 20px black, 61px 52px 0px 18px #CCC, -9px 152px 0px 47px black, -9px 149px 0px 46px #CCC, -130px 142px 0px 46px black, -130px 140px 0px 46px #CCC, 117px 144px 0px 45px black, 115px 140px 0px 43px #CCC;
+		}
+		body{
+			background-color: #0E0E0E;
+			
+		}
+
+
+
+		
+		.btn-danger{
+			background-color: #F20001 !important;	
+		}
+		.container{
+			text-align: center;
+						color: #F20001;
+		}
+		.container h1{
+			font-size: 7em;
+		}
+		.container h2{
+			font-size: 4.5em;
+		}
+		.btn {
+			background-color: #F20001;
+			border-radius:0;
+			color: white;
+		}
+		
+		
+		
+		
+		html, body {
+			
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  height: auto;
+  background: black;
+}
+
+#kitt {
+
+  width: 1240px;
+  height: 150px;
+  	margin: 0 auto;
+}
+.one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .ten {
+  width: 120px;
+  height: 80px;
+  background: #F20001;
+  margin: 0;
+  display: inline-block;
+  -webkit-box-shadow: 0 0 30px #F20001, inset 0 0 5px rgba(255,255,255, 0.5);
+  border-radius: 5px;
+  -webkit-animation-duration: 0.7s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+}
+.one {
+   -webkit-animation-name: first ;
+}
+.two {
+  -webkit-animation-name: second ;
+}
+.three {
+  -webkit-animation-name: third ;
+}
+.four {
+  -webkit-animation-name: fourth ;
+}
+.five {
+  -webkit-animation-name: fifth ;
+}
+.six {
+  -webkit-animation-name: sixth ;
+}
+.seven {
+  -webkit-animation-name: seventh ;
+}
+.eight {
+  -webkit-animation-name: eighth ;
+}
+.nine {
+  -webkit-animation-name: ninth ;
+}
+.ten {
+  -webkit-animation-name: tenth ;
+}
+@-webkit-keyframes first {
+  0%   {opacity:0.2;}
+  10%  {opacity:1;}
+  20%  {opacity:0.2;}
+  100% {opacity:0;}
+}
+@-webkit-keyframes second {
+  0%   {opacity:0;}
+  10%   {opacity:0.2;}
+  20%  {opacity:1;}
+  30%  {opacity:0.2;}
+  100% {opacity:0;}
+}
+@-webkit-keyframes third {
+  0%   {opacity:0;}
+  20%  {opacity:0.2;}
+  30%  {opacity:1;}
+  40%  {opacity:0.2;}
+  100% {opacity:0;}
+}
+@-webkit-keyframes fourth {
+  0%   {opacity:0;}
+  30%  {opacity:0.2;}
+  40%  {opacity:1;}
+  50%  {opacity:0.2;}
+  100% {opacity:0;}
+}
+@-webkit-keyframes fifth {
+  0%   {opacity:0;}
+  40%  {opacity:0.2;}
+  50%  {opacity:1;}
+  60%  {opacity:0.2;}
+  100% {opacity:0;}
+}
+@-webkit-keyframes sixth {
+  0%   {opacity:0;}
+  50%  {opacity:0.2;}
+  60%  {opacity:1;}
+  70%  {opacity:0.2;}
+  100% {opacity:0;}
+}
+@-webkit-keyframes seventh {
+  0%   {opacity:0;}
+  60%  {opacity:0.2;}
+  70%  {opacity:1;}
+  80%  {opacity:0.2;}
+  100% {opacity:0;}
+}
+@-webkit-keyframes eighth {
+  0%   {opacity:0;}
+  70%  {opacity:0.2;}
+  80%  {opacity:1;}
+  90%  {opacity:0.2;}
+  100% {opacity:0;}
+}
+@-webkit-keyframes ninth {
+  0%   {opacity:0;}
+  80%  {opacity:0.2;}
+  90%  {opacity:1;}
+  100% {opacity:0.2;}
+}
+@-webkit-keyframes tenth {
+  0%   {opacity:0;}
+  90%  {opacity:0.2;}
+  100%  {opacity:1;}
+}
+	</style>
+</head>
+<body>
+	<div class="webb">
+       
+		<div class="row">
+			<div id='kitt'>
+			  <div class='one'></div>
+			  <div class='two'></div>
+			  <div class='three'></div>
+			  <div class='four'></div>
+			  <div class='five'></div>
+			  <div class='six'></div>
+			  <div class='seven'></div>
+			  <div class='eight'></div>
+			  <div class='nine'></div>
+			  <div class='ten'></div>
+			</div>
+			
+		</div>
+		   <div class="container">
+		      <h1>KNIGHTSPIDER</h1>
+		      <h2>PROJECT</h2>
+		      <div class="row" style="margin-top:50px;">
+				  <a class="btn btn-lg" role="button">Ga verder naar de website</a>
+		   	  </div>
+		   </div>
+	</div>
+			
+</body>
+</html>
+

@@ -1,0 +1,42 @@
+<div ng-controller="CarouselDemoCtrl">
+  <div style="background-color:gray;">
+    <carousel interval="myInterval">
+      <slide ng-repeat="slide in slides" active="slide.active">
+        <img ng-src="{{slide.image}}" style="margin:auto; max-height:400px">
+        <div class="carousel-caption">
+          <p>{{slide.text}}</p>
+        </div>
+      </slide>
+    </carousel>
+  </div>
+</div>
+<div class="clear"></div>
+
+
+<div class="container text-center">
+  <div class="row" style="padding-bottom:50px;">
+    <h2>Project Knight spider IDP Engineering</h2>
+    <p>Het IDP project is een interdisciplinair project tussen verschillende divisies van de afdeling Engineering op de NHL Hogeschool. In de huidige project periode wordt er van de studenten gevraagd om een Hexapod te ontwikkelen, hierbij zullen de samenwerkende kwaliteiten van de ingenieurs in opleiding worden getraint. Ten einde van het project zullen de producten van de groepen worden getoetst in een wedstrijd. Deze website representeert het groepswerk van groep 5 <i> "The Hoffs" </i> die de spin <i>"Knight spider"</i> gaat ontwikkelen.</p>
+    
+  </div>
+    <div class="row">
+        <div class="col-lg-4">
+          <img class="img-circle" src="http://www.dmu.ac.uk/webimages/Technology-images/dept-comp-tech/forensics-lab-bnr.jpg" alt="Generic placeholder image" width="140" height="140">
+          <h2>Informatica</h2>
+          <p>De leden van de projectdiscipline informatica focussen zich op de software van de hexapod. Met behulp van scrum, ontwerpprocedures en discusseren worden ideeën gevormd. Deze ideeën worden getest, doorgedacht en geprogrammeerd. Hiernaast wordt ook een website en app ontwikkeld door informatica en ondersteunen we electrotechniek</p>
+
+        </div>
+        <div class="col-lg-4">
+          <img class="img-circle" src="http://nexnema.ir/wp-content/gallery/electronic-wallpapers/slide3_electronic_wallpaper_nexnema.ir_.jpg" alt="Generic placeholder image" width="140" height="140">
+          <h2>Electrotechniek</h2>
+          <p>De leden van elektrotechniek zorgen ervoor dat de connectie tussen de software en de hardware goed verloopt. Om dit in goede banen te leiden worden er verschillende berekeningen en testen uitgevoerd die vervolgens worden gesimuleerd en getest. Kortom, de leden van elektrotechniek zijn de schakel tussen informatica en  werktuigbouwkunde.</p>
+
+        </div>
+        <div class="col-lg-4">
+          <img class="img-circle" src="http://www.energyproducts.co.za/files/imagecache/view/product_images/example1.jpg" alt="Generic placeholder image" width="140" height="140">
+          <h2>Werktuigbouwkunde</h2>
+          <p>De leden van de projectdiscipline werktuigbouwkunde focussen zich op het contructieve deel van de hexapod. Met behulp van onderzoeken en ontwerpprocedures worden concepten gecreëerd. Deze concepten worden getest, doorberekend en gerealiseerd. Hiernaast wordt ook een groot deel estetischevormgeving verricht door deze projectdiscipline.</p>
+
+        </div>
+    </div>
+</div>

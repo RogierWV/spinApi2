@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PROJECTNAAM | Welcome</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+        <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+        <script>tinymce.init({selector:'textarea'});</script>
+    <title></title>
+</head>
+<body>
+
+<nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+        <li class="name">
+            <h1><a href="index.html">PROJECTNAAM</a></h1>
+        </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+            <li><a href="projectInfo.html">Project info</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="livestream.html">Livestream</a></li>
+        </ul>
+    </section>
+</nav>
+
+<div class="row">
+    <div class="large-9 columns" role="content">
+        <br>
+        <h2>Plaats een bericht op onze blog:</h2><br>
+        <form enctype="multipart/form-data" action="http://idp-api.herokuapp.com/blog" method="POST">
+            Naam:
+            <input id="namebox" type="text" name="naam">
+            Onderwerp:<br>
+            <input id="subjectbox" type="text" name="onderwerp"><br>
+            Bericht:<br>
+            <textarea id="messagebox" rows="4" cols="50" name="bericht"></textarea>
+            Upload een foto:
+            <label><strong>Photo:</strong><input type="file" name="userpic" id="userpic" /></label>
+            <input id="submitbutton" type="submit" value="Verzenden">
+            <input type="reset" value="Reset velden">
+        </form>
+    </div>
+</div>
+
+<footer class="row">
+    <div class="large-12 columns">
+        <hr/>
+        <div class="row">
+            <div class="large-6 columns">
+                <p>© Copyright NHL Engineering department</p>
+            </div>
+            <div class="large-6 columns">
+                <ul class="inline-list right">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="projectInfo.html">Project info</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="livestream.html">Livestream</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+<script>
+
+</script>
+</body>
+</html>

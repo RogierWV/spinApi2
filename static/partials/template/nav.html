@@ -1,0 +1,31 @@
+<nav id="titlebar" class="navbar navbar-default">
+        <a class="navbar-brand pull-left">NHL Engineering</a>
+        <a class="navbar-brand pull-right">IDP Projectgroep 5</a>
+</nav>
+<nav id="navigation" class="navbar navbar-default" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+    
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+      
+        <ul class="nav navbar-nav navbar-left">
+            <li ng-class="{active:isActive('/')}" style="background-color:#d2d6d5"><a href="#/">Home</a></li>
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+            <li ng-class="{active:isActive('/blog')}"><a href="#/blog">Blog</a></li>
+            <li ng-class="{active:isActive('/livestream')}"><a href="#/livestream">Livestream</a></li>
+            <li ng-class="{active:isActive('/analytics')}"><a href="#/analytics">Analytics</a></li>
+            <li ng-class="{active:isActive('/contact')}"><a href="#/contact">Contact</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+</nav>

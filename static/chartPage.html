@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+    <meta name="theme-color" content="#404040">
+    <link rel="stylesheet" href="css/foundation.css" />
+    <link rel="stylesheet" href="css/chartPage.css"/>
+    <script src="js/vendor/modernizr.js"></script>
+    <script src="js/Chart.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/apiCalls.js"></script>
+</head>
+<body>
+<nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+        <li class="name">
+            <h1><a href="index.html">PROJECTNAAM</a></h1>
+        </li>
+        <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+    <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+            <li><a href="projectInfo.html">Project info</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="livestream.html">Livestream</a></li>
+            <li><a href="chartPage.html">Anaytics</a></li>
+        </ul>
+    </section>
+</nav>
+<div class="cont large-11 large-centered columns">
+    <div id="buyer" class = "chartContainer">
+        <p class="chartLabel">BUYER</p>
+        <canvas id="buyers" class="chart"></canvas>
+    </div>
+    <div id="pie" class = "chartContainer">
+        <p class="chartLabel">PIE</p>
+        <canvas id="myChart" class="chart"></canvas>
+    </div>
+    <div id="chart" class = "chartContainer">
+        <p class="chartLabel">RAD</p>
+        <canvas id="ding" class="chart"></canvas>
+    </div>
+</div>
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+<script>
+    generatePieData();
+    generateData();
+    createPie();
+    createrad();
+</script>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>

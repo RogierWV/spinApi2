@@ -1,0 +1,89 @@
+
+
+    <div class="row text-center">
+        <h1><i><del>Analyse</del></i> Demo Data</h1>
+        <p>Hier vind u de Real-Time data van de spin terug. Indien de spin niet <br> online is kun u hier de data zien die of wel door <br> recent behaalde data vinden of demo data</p>
+    </div>
+<div class="container">
+    <div class="row">
+        
+         <div class="col-lg-4 text-center">
+                <div class="batterij"></div>
+          <h2>Batterij</h2>
+          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+
+        </div>
+        
+       <div class="col-lg-4 text-center">
+                <div class="modus"></div>
+          <h2>Modus</h2>
+          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+
+        </div>
+        
+        <div class="col-lg-4 text-center">
+                <div class="batterij"></div>
+          <h2>Voltage</h2>
+          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+
+        </div>
+
+        
+    </div>
+    <hr>
+<!--<div class="row">
+
+        <section class="panel panel-primary col-md-4">
+            <header class="panel-heading">
+                <h3 class="panel-title">Battery Info</h3>
+            </header>
+            <div class="panel-body">
+                <div id="modus"></div>
+            </div>
+        </section>
+        <section class="panel panel-primary col-md-4">
+            <header class="panel-heading">
+                <h3 class="panel-title">Mode</h3>
+            </header>
+            <div class="panel-body">
+                <div id="batterij"></div>
+            </div>
+        </section>
+        <section class="panel panel-primary col-md-4">
+            <header class="panel-heading">
+                <h3 class="panel-title">Mode</h3>
+            </header>
+            <div class="panel-body">
+                <div id="batterij"></div>
+            </div>
+        </section>
+</div>-->
+
+
+<div class="row">
+          <div id="buyer" class="col-lg-4 text-center">
+              <canvas id="buyers" class="chart"></canvas>
+              <h2>Battery</h2>
+              <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+          </div>
+          
+          <div id="pie" class="col-lg-4 text-center">
+                <canvas id="myChart" class="chart"></canvas>
+              <h2>Mode Times</h2>
+              <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+          </div>
+          
+          <div id="chart" class="col-lg-4 text-center">
+              <canvas id="ding" class="chart"></canvas>
+              <h2>Thingy</h2>
+              <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+          </div>
+
+</div>
+
+<script>
+    insertData();
+    generatePieData();
+    generateData();
+    createrad();
+</script>

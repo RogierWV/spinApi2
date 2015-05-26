@@ -1,0 +1,21 @@
+<!--Body content-->
+<div class="container">
+    <button class="btn btn-primary" onclick="goBack()">Go Back</button>
+<div class="post">
+    <header>            
+        <h1 id="panels">{{post.titel}}</h1>
+    </header>
+    <br/><br/>
+    <body>
+        <p ng-bind-html="toTrustedHTML(post.text)"></p>
+        <img ng-src="{{post.image}}" alt=""/>
+    </body>
+    <footer><p class="text-left">{{ctime}}</p><i><p class="text-right">Door: {{post.auteur}}</p></i></footer>
+</div>
+</div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>

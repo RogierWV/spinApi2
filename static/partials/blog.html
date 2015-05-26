@@ -1,0 +1,40 @@
+<div class=" text-center ">
+        <h1>Blog</h1>
+        <p>Op deze pagina vind u relevante blog berichten die wij onder het project berichten.<br>
+            Binnenkort ook op Twitter!</p>
+</div>
+<div class="container">
+    <div class="row">
+        <nav class="navbar navbar-default" role="navigation">
+            <ul class="nav navbar-nav">
+                <li><a>Search: <input ng-model="query"></a></li>
+                <li><a>Sort by:
+                    <select ng-model="orderProp">
+                        <option value="title">Title</option>
+                        <option value="body">Body</option>
+                    </select>
+                    </a>
+                </li>    
+            </ul>
+        </nav>
+    </div>
+    
+    
+    <div class="posts">
+        <div ng-repeat="post in posts">
+
+            
+            <div class="post">
+                    <header>            
+                        <h4 id="panels"><a href="#/blog/post/{{post.id}}">{{post.titel}}</a></h4>
+                    </header>       
+                    <body>
+                         <p><span ng-bind-html="toTrustedHTML(post.text)"></span>... <a href="#/blog/post/{{post.id}}">lees meer</a></p>
+                    </body>
+                    <footer><p class="text-left">{{ctime}}</p><i><p class="text-right">Door: {{post.auteur}}</p></i></footer>
+            </div>
+
+        </div>
+    </div>
+    
+</div>
