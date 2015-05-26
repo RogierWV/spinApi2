@@ -34,7 +34,7 @@ func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func GetPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	rows,_ := conn.Query("SELECT * FROM blog WHERE id = $1", ps.ByName("id"))
+	rows,_ := conn.Query("SELECT * FROM blog WHERE id = $1 LIMIT 1", ps.ByName("id"))
 	data := BlogPost{}
 	rows.Next()
 	rows.Scan(&data.Id, &data.Titel, &data.Text, &data.Auteur, &data.Img_url, &data.Ctime, &data.Image)
@@ -46,6 +46,7 @@ func GetPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 func GetLatestSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows,_ := conn.Query("SELECT * FROM spindata ORDER BY tijd DESC LIMIT 1")
 	spin := SpinData{}
+	rows.Next()
 	rows.Scan(&spin.Id, &spin.Tijd, &spin.Mode, &spin.Hellingsgraad, &spin.Snelheid, &spin.Batterij, &spin.BallonCount)
 	buf,_ := json.Marshal(spin)
 	SetHeaders(&w)
@@ -96,6 +97,7 @@ func GetArchivedSpinMode(w http.ResponseWriter, r *http.Request, ps httprouter.P
 func GetLatestServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows,_ := conn.Query("SELECT * FROM servodata ORDER BY tijd DESC LIMIT 1")
 	servo := ServoData{}
+	rows.Next()
 	rows.Scan(&servo.Id, &servo.ServoId, &servo.Tijd, &servo.Voltage, &servo.Positie, &servo.Load, &servo.Temperatuur)
 	buf,_ := json.Marshal(servo)
 	SetHeaders(&w)
