@@ -1,0 +1,1 @@
+UPDATE blog SET text = '<p>Er is een bewegende spin!</p><p><iframe width="560" height="315" src="https://www.youtube.com/embed/05PSgjXhePs" frameborder="0" allowfullscreen></iframe></p><p><iframe width="560" height="315" src="https://www.youtube.com/embed/b9jyJzgYy4I" frameborder="0" allowfullscreen></iframe></p>' WHERE id = 70;
