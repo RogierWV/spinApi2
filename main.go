@@ -138,6 +138,12 @@ func GetArchivedServoData(w http.ResponseWriter, r *http.Request, ps httprouter.
 	w.Write(buf)
 }
 
+func Test(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	buf,_ := json.Marshal("test")
+	SetHeaders(&w)
+	w.Write(buf)
+}
+
 func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	//r.ParseMultipartForm(32 << 20)
 	/*file, handler, err := r.FormFile("uploadfile")
@@ -204,7 +210,11 @@ func main() {
 	defer conn.Close()
 
 	es := eventsource.New(
-		eventsource.DefaultSettings(),
+		&eventsource.Settings{	
+            Timeout: 5 * time.Second,
+            CloseOnTimeout: false,
+            IdleTimeout: 30 * time.Minute,
+        },
 		func(req *http.Request) [][]byte {
 			return [][]byte{
 				[]byte("X-Accel-Buffering: no"),
@@ -216,6 +226,7 @@ func main() {
 
 	router := httprouter.New()
 	//router.GET("/", GetDoc)
+	router.GET("/test", Test)
 	router.GET("/blog", GetBlog)
 	router.GET("/blog/:id", GetPost)
 	router.GET("/spin/latest", GetLatestSpinData)
