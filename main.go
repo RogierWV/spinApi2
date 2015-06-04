@@ -38,10 +38,9 @@ func GetBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func GetPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	rows,_ := conn.Query("SELECT * FROM blog WHERE id = $1 LIMIT 1", ps.ByName("id"))
+	row := conn.QueryRow("SELECT * FROM blog WHERE id = $1 LIMIT 1", ps.ByName("id"))
 	data := BlogPost{}
-	rows.Next()
-	rows.Scan(&data.Id, &data.Titel, &data.Text, &data.Auteur, &data.Img_url, &data.Ctime, &data.Image)
+	row.Scan(&data.Id, &data.Titel, &data.Text, &data.Auteur, &data.Img_url, &data.Ctime, &data.Image)
 	buf,_ := json.Marshal(data)
 	SetHeaders(&w)
 	w.Write(buf)
@@ -58,20 +57,18 @@ func GetLatestSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Par
 }
 
 func GetLatestSpinBatterij(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	rows,_ := conn.Query("SELECT batterij FROM spindata ORDER BY tijd DESC LIMIT 1")
+	row := conn.QueryRow("SELECT batterij FROM spindata ORDER BY tijd DESC LIMIT 1")
 	var data int 
-	rows.Next()
-	rows.Scan(&data)
+	row.Scan(&data)
 	buf,_ := json.Marshal(data)
 	SetHeaders(&w)
 	w.Write(buf)
 }
 
 func GetLatestSpinMode(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	rows,_ := conn.Query("SELECT mode FROM spindata ORDER BY tijd DESC LIMIT 1")
+	row := conn.QueryRow("SELECT mode FROM spindata ORDER BY tijd DESC LIMIT 1")
 	var data string 
-	rows.Next()
-	rows.Scan(&data)
+	row.Scan(&data)
 	buf,_ := json.Marshal(data)
 	SetHeaders(&w)
 	w.Write(buf)
@@ -119,10 +116,9 @@ func GetArchivedSpinMode(w http.ResponseWriter, r *http.Request, ps httprouter.P
 }
 
 func GetLatestServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	rows,_ := conn.Query("SELECT * FROM servodata ORDER BY tijd DESC LIMIT 1")
+	row := conn.QueryRow("SELECT * FROM servodata ORDER BY tijd DESC LIMIT 1")
 	servo := ServoData{}
-	rows.Next()
-	rows.Scan(&servo.Id, &servo.ServoId, &servo.Tijd, &servo.Voltage, &servo.Positie, &servo.Load, &servo.Temperatuur)
+	row.Scan(&servo.Id, &servo.ServoId, &servo.Tijd, &servo.Voltage, &servo.Positie, &servo.Load, &servo.Temperatuur)
 	buf,_ := json.Marshal(servo)
 	SetHeaders(&w)
 	w.Write(buf)
