@@ -12,9 +12,12 @@ import (
 	"database/sql"
 	_ "github.com/lib/pq"
 	"gopkg.in/antage/eventsource.v1"
+	"strconv"
 )
 
 var conn *sql.DB
+var es eventsource.EventSource
+var id int
 
 func SetHeaders(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
@@ -197,6 +200,12 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 	w.Write([]byte("successful"))
 }
 
+func PostLog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	es.SendEventMessage(r.FormValue("log"), "log", strconv.Itoa(id))
+	w.WriteHeader(201)
+	w.Write([]byte("successful"))
+}
+
 /*func GetDoc(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	http.ServeFile(w,r,"./static/doc.html")
 }*/
@@ -209,7 +218,7 @@ func main() {
 	conn,_ = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	defer conn.Close()
 
-	es := eventsource.New(
+	es = eventsource.New(
 		&eventsource.Settings{	
             Timeout: 5 * time.Second,
             CloseOnTimeout: false,
@@ -223,6 +232,8 @@ func main() {
 		},
 	)
 	defer es.Close()
+
+	id = 0
 
 	router := httprouter.New()
 	//router.GET("/", GetDoc)
@@ -241,6 +252,7 @@ func main() {
 	router.POST("/blog", PostBlog)
 	router.POST("/spin", PostSpinData)
 	router.POST("/servo", PostServoData)
+	router.POST("/log", PostLog)
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "3000"
