@@ -1,8 +1,6 @@
 package main
 
-import (
-	"time"
-)
+import "time"
 
 type BlogPost struct {
 	Id int64 `json:"id"`

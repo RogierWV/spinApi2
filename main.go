@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"database/sql"
 	_ "github.com/lib/pq"
+	"gopkg.in/antage/eventsource.v1"
 )
 
 var conn *sql.DB
@@ -198,6 +199,10 @@ func Static(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	http.ServeFile(w,r,"./static/"+ps.ByName("file"))
 }
 
+func SSESubscribe(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	
+}
+
 func main() {
 	conn,_ = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	defer conn.Close()
@@ -213,6 +218,7 @@ func main() {
 	router.GET("/spin/archive/mode", GetArchivedSpinMode)
 	router.GET("/servo/latest", GetLatestServoData)
 	router.GET("/servo/archive", GetArchivedServoData)
+	router.GET("/subscribe", SSESubscribe)
 	router.POST("/blog", PostBlog)
 	router.POST("/spin", PostSpinData)
 	router.POST("/servo", PostServoData)
