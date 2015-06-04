@@ -244,15 +244,18 @@ func main() {
 	router.GET("/spin/archive/mode", GetArchivedSpinMode)
 	router.GET("/servo/latest", GetLatestServoData)
 	router.GET("/servo/archive", GetArchivedServoData)
-	http.Handle("/subscribe", es)
 	router.POST("/blog", PostBlog)
 	router.POST("/spin", PostSpinData)
 	router.POST("/servo", PostServoData)
 	router.POST("/log", PostLog)
+
+	http.Handle("/subscribe", es)
+	http.Handle("/", router)
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "3000"
 	}
 	fmt.Printf("Starting server at localhost:%s...", port)
-	log.Fatal(http.ListenAndServe(":"+port, router))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
