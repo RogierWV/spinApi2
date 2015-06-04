@@ -11,7 +11,7 @@ import (
 	"fmt"
 	"database/sql"
 	_ "github.com/lib/pq"
-	"gopkg.in/antage/eventsource.v1"
+	//"gopkg.in/antage/eventsource.v1"
 )
 
 var conn *sql.DB
