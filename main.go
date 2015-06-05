@@ -217,7 +217,7 @@ func PostLog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 	es.SendEventMessage(r.FormValue("log"), "log", "")
 	w.WriteHeader(201)
-	w.Write([]byte("successful"))
+	w.Write([]byte(r.FormValue("log")))
 }
 
 func main() {
