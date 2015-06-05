@@ -195,6 +195,13 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 }
 
 func PostLog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	_,err := conn.Query("INSERT INTO logs (log) VALUES ($1)", 
+		r.FormValue("log"))
+	if err != nil {
+		w.WriteHeader(500)
+		w.Write([]byte(err.Error()))
+		return
+	}
 	es.SendEventMessage(r.FormValue("log"), "", "")
 	w.WriteHeader(201)
 	w.Write([]byte("successful"))
