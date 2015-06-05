@@ -12,12 +12,10 @@ import (
 	"database/sql"
 	_ "github.com/lib/pq"
 	"gopkg.in/antage/eventsource.v1"
-	"strconv"
 )
 
 var conn *sql.DB
 var es eventsource.EventSource
-var id int
 
 func SetHeaders(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
@@ -197,7 +195,7 @@ func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 }
 
 func PostLog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	es.SendEventMessage(r.FormValue("log"), "log", strconv.Itoa(id))
+	es.SendEventMessage(r.FormValue("log"), "", "")
 	w.WriteHeader(201)
 	w.Write([]byte("successful"))
 }
@@ -220,8 +218,6 @@ func main() {
 		},
 	)
 	defer es.Close()
-
-	id = 0
 
 	router := httprouter.New()
 	router.GET("/test", Test)
