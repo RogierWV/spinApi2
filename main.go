@@ -251,6 +251,7 @@ func main() {
 	router.GET("/spin/archive/mode", GetArchivedSpinMode)
 	router.GET("/servo/latest", GetLatestServoData)
 	router.GET("/servo/archive", GetArchivedServoData)
+	router.GET("/log", GetLogs)
 	router.POST("/blog", PostBlog)
 	router.POST("/spin", PostSpinData)
 	router.POST("/servo", PostServoData)
