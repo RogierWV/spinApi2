@@ -135,6 +135,19 @@ func GetArchivedServoData(w http.ResponseWriter, r *http.Request, ps httprouter.
 	w.Write(buf)
 }
 
+func GetLogs() {
+	rows,_ := conn.Query("SELECT * FROM logs")
+	data := []LogData{}
+	for rows.Next() {
+		log := LogData{}
+		rows.Scan(&log.Id, &log.Log)
+		data = append(data, log)
+	}
+	buf,_ := json.Marshal(data)
+	SetHeaders(&w)
+	w.Write(buf)
+}
+
 func Test(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	buf,_ := json.Marshal("test")
 	SetHeaders(&w)
@@ -202,7 +215,7 @@ func PostLog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		w.Write([]byte(err.Error()))
 		return
 	}
-	es.SendEventMessage(r.FormValue("log"), "", "")
+	es.SendEventMessage(r.FormValue("log"), "log", "")
 	w.WriteHeader(201)
 	w.Write([]byte("successful"))
 }

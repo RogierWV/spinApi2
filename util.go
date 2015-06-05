@@ -31,3 +31,8 @@ type ServoData struct {
 	Load int64 `json:"load"`
 	Temperatuur int64 `json:"temperatuur"`
 }
+
+type LogData struct {
+	Id int64 `json:"id"`
+	Log int64 `json:"log"`
+}
