@@ -212,6 +212,7 @@ func main() {
 		},
 		func(req *http.Request) [][]byte {
 			return [][]byte{
+				[]byte("Content-Type: text/event-stream")
 				[]byte("X-Accel-Buffering: no"),
 				[]byte("Access-Control-Allow-Origin: *"),
 			}
