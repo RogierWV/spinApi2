@@ -135,7 +135,7 @@ func GetArchivedServoData(w http.ResponseWriter, r *http.Request, ps httprouter.
 	w.Write(buf)
 }
 
-func GetLogs() {
+func GetLogs(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	rows,_ := conn.Query("SELECT * FROM logs")
 	data := []LogData{}
 	for rows.Next() {
