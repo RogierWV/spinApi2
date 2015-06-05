@@ -169,7 +169,7 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(201)
-	w.Write([]byte("<meta http-equiv=\"refresh\" content=\"5; url=http://knightspider.herokuapp.com/#/blog\">successful"))
+	w.Write([]byte("<meta http-equiv=\"refresh\" content=\"1; url=http://knightspider.herokuapp.com/#/blog\">successful"))
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
@@ -202,24 +202,16 @@ func PostLog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.Write([]byte("successful"))
 }
 
-/*func GetDoc(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	http.ServeFile(w,r,"./static/doc.html")
-}*/
-
-func Static(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	http.ServeFile(w,r,"./static/"+ps.ByName("file"))
-}
-
 func main() {
 	conn,_ = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	defer conn.Close()
 
 	es = eventsource.New(
 		&eventsource.Settings{	
-            Timeout: 5 * time.Second,
-            CloseOnTimeout: false,
-            IdleTimeout: 30 * time.Minute,
-        },
+			Timeout: 5 * time.Second,
+			CloseOnTimeout: false,
+			IdleTimeout: 30 * time.Minute,
+		},
 		func(req *http.Request) [][]byte {
 			return [][]byte{
 				[]byte("X-Accel-Buffering: no"),
@@ -232,7 +224,6 @@ func main() {
 	id = 0
 
 	router := httprouter.New()
-	//router.GET("/", GetDoc)
 	router.GET("/test", Test)
 	router.GET("/blog", GetBlog)
 	router.GET("/blog/:id", GetPost)
