@@ -34,5 +34,5 @@ type ServoData struct {
 
 type LogData struct {
 	Id int64 `json:"id"`
-	Log int64 `json:"log"`
+	Log string `json:"log"`
 }
