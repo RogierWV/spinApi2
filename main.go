@@ -220,6 +220,11 @@ func PostLog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.Write([]byte(r.FormValue("log")))
 }
 
+func Head(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	SetHeaders(&w)
+	w.WriteHeader(204)
+}
+
 func main() {
 	conn,_ = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	defer conn.Close()
@@ -240,6 +245,7 @@ func main() {
 	defer es.Close()
 
 	router := httprouter.New()
+	router.HEAD("/*path", Head)
 	router.GET("/test", Test)
 	router.GET("/blog", GetBlog)
 	router.GET("/blog/:id", GetPost)

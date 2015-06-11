@@ -1,6 +1,10 @@
 package main
 
-import "time"
+import (
+	"time"
+	"database/sql"
+	_ "github.com/lib/pq"
+)
 
 type BlogPost struct {
 	Id int64 `json:"id"`
@@ -36,3 +40,4 @@ type LogData struct {
 	Id int64 `json:"id"`
 	Log string `json:"log"`
 }
+
