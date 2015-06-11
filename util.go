@@ -2,8 +2,8 @@ package main
 
 import (
 	"time"
-	"database/sql"
-	_ "github.com/lib/pq"
+	//"database/sql"
+	//_ "github.com/lib/pq"
 )
 
 type BlogPost struct {
@@ -41,3 +41,4 @@ type LogData struct {
 	Log string `json:"log"`
 }
 
+//selectPost := 
