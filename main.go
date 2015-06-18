@@ -193,17 +193,17 @@ func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 	snelheid := r.FormValue("snelheid")
 	batterij := r.FormValue("batterij")
 	balloncount := r.FormValue("ballonCount")
-	/*_,err := conn.Query("INSERT INTO spindata (tijd, mode, hellingsgraad, snelheid, batterij, balloncount) VALUES ($1, $2, $3, $4, $5, $6)", time.Now(), 
+	_,err := conn.Query("INSERT INTO spindata (tijd, mode, hellingsgraad, snelheid, batterij, balloncount) VALUES ($1, $2, $3, $4, $5, $6)", time.Now(), 
 		mode, hellingsgraad, snelheid, batterij, balloncount)
 	if err != nil {
 		w.WriteHeader(500)
 		w.Write([]byte(fmt.Sprintf("mode = %s, hellingsgraad = %s, batterij = %s, balloncount = %s", mode, hellingsgraad, batterij, balloncount)))
 		w.Write([]byte(err.Error()))
 		return
-	}*/
+	}
 	w.WriteHeader(201)
-	w.Write([]byte(fmt.Sprintf("mode = %s, hellingsgraad = %s, snelheid = %s, batterij = %s, balloncount = %s", mode, hellingsgraad, snelheid, batterij, balloncount)))
-	//w.Write([]byte("successful"))
+	//w.Write([]byte(fmt.Sprintf("mode = %s, hellingsgraad = %s, snelheid = %s, batterij = %s, balloncount = %s", mode, hellingsgraad, snelheid, batterij, balloncount)))
+	w.Write([]byte("successful"))
 }
 
 func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
