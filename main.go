@@ -210,6 +210,7 @@ func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 		return
 	}
 	w.WriteHeader(201)
+	w.Write([]byte(fmt.Sprintf("mode = %s, hellingsgraad = %s, batterij = %s, balloncount = %s", mode, hellingsgraad, batterij, balloncount)))
 	w.Write([]byte("successful"))
 }
 
