@@ -173,29 +173,26 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	err = nil*/
 
 	//_,err := conn.Query("INSERT INTO blog (titel, text, auteur, ctime, image) VALUES ($1, $2, $3, $4, $5)", r.FormValue("titel"), r.FormValue("text"), r.FormValue("auteur"), time.Now(), "http://idp-api.herokuapp.com/img/"+handler.Filename)
-	/*_,err := conn.Query("INSERT INTO blog (titel, text, auteur, ctime) VALUES ($1, $2, $3, $4)", r.FormValue("onderwerp"), r.FormValue("bericht"), r.FormValue("naam"), time.Now())
+	_,err := conn.Query("INSERT INTO blog (titel, text, auteur, ctime) VALUES ($1, $2, $3, $4)", r.FormValue("onderwerp"), r.FormValue("bericht"), r.FormValue("naam"), time.Now())
 	if err != nil {
 		w.WriteHeader(500)
 		w.Write([]byte(err.Error()))
 		return
-	}*/
+	}
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(201)
-	reqStr, _ := httputil.DumpRequest(r,true)
-	w.Write(reqStr)
-	w.Write([]byte(r.FormValue("title")))
-	//w.Write([]byte("<meta http-equiv=\"refresh\" content=\"1; url=http://knightspider.herokuapp.com/#/blog\">successful"))
+	w.Write([]byte("<meta http-equiv=\"refresh\" content=\"1; url=http://knightspider.herokuapp.com/#/blog\">successful"))
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	//reqStr, _ := httputil.DumpRequest(r, true)
-	w.Write([]byte(r.FormValue("mode")))
+	//w.Write([]byte(r.FormValue("mode")))
 	//r.ParseForm()
-	/*mode := r.FormValue("mode")
+	mode := r.FormValue("mode")
 	hellingsgraad := r.FormValue("hellingsgraad")
 	snelheid := r.FormValue("snelheid")
 	batterij := r.FormValue("batterij")
-	balloncount := r.FormValue("ballonCount")*/
+	balloncount := r.FormValue("ballonCount")
 	/*_,err := conn.Query("INSERT INTO spindata (tijd, mode, hellingsgraad, snelheid, batterij, balloncount) VALUES ($1, $2, $3, $4, $5, $6)", time.Now(), 
 		mode, hellingsgraad, snelheid, batterij, balloncount)
 	if err != nil {
@@ -204,8 +201,8 @@ func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 		w.Write([]byte(err.Error()))
 		return
 	}*/
-	/*w.WriteHeader(201)
-	w.Write([]byte(fmt.Sprintf("mode = %s, hellingsgraad = %s, snelheid = %s, batterij = %s, balloncount = %s", mode, hellingsgraad, snelheid, batterij, balloncount)))*/
+	w.WriteHeader(201)
+	w.Write([]byte(fmt.Sprintf("mode = %s, hellingsgraad = %s, snelheid = %s, batterij = %s, balloncount = %s", mode, hellingsgraad, snelheid, batterij, balloncount)))
 	//w.Write([]byte("successful"))
 }
 
