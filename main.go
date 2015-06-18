@@ -184,10 +184,28 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	mode := r.FormValue("mode")
+	hellingsgraad := r.FormValue("hellingsgraad")
+	if hellingsgraad == "" {
+		hellingsgraad = "0"
+	}
+	snelheid := r.FormValue("snelheid")
+	if snelheid == "" {
+		snelheid = "0"
+	}
+	batterij := r.FormValue("batterij")
+	if batterij == "" {
+		batterij = "0"
+	}
+	balloncount := r.FormValue("ballonCount")
+	if balloncount == "" {
+		balloncount = "0"
+	}
 	_,err := conn.Query("INSERT INTO spindata (tijd, mode, hellingsgraad, snelheid, batterij, balloncount) VALUES ($1, $2, $3, $4, $5, $6)", time.Now(), 
-		r.FormValue("mode"), r.FormValue("hellingsgraad"), r.FormValue("snelheid"), r.FormValue("batterij"), r.FormValue("ballonCount"))
+		mode, hellingsgraad, snelheid, batterij, balloncount)
 	if err != nil {
 		w.WriteHeader(500)
+		w.Write([]byte(fmt.Sprintf("mode = %s, hellingsgraad = %s, batterij = %s, balloncount = %s", mode, hellingsgraad, batterij, balloncount)))
 		w.Write([]byte(err.Error()))
 		return
 	}
