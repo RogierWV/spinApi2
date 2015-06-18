@@ -184,6 +184,7 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	r.ParseForm()
 	w.Write([]byte(r.Form.Encode()))
 	/*mode := r.PostFormValue("mode")
 	hellingsgraad := r.PostFormValue("hellingsgraad")
