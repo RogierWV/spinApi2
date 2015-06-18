@@ -173,12 +173,12 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	err = nil*/
 
 	//_,err := conn.Query("INSERT INTO blog (titel, text, auteur, ctime, image) VALUES ($1, $2, $3, $4, $5)", r.FormValue("titel"), r.FormValue("text"), r.FormValue("auteur"), time.Now(), "http://idp-api.herokuapp.com/img/"+handler.Filename)
-	_,err := conn.Query("INSERT INTO blog (titel, text, auteur, ctime) VALUES ($1, $2, $3, $4)", r.FormValue("onderwerp"), r.FormValue("bericht"), r.FormValue("naam"), time.Now())
+	/*_,err := conn.Query("INSERT INTO blog (titel, text, auteur, ctime) VALUES ($1, $2, $3, $4)", r.FormValue("onderwerp"), r.FormValue("bericht"), r.FormValue("naam"), time.Now())
 	if err != nil {
 		w.WriteHeader(500)
 		w.Write([]byte(err.Error()))
 		return
-	}
+	}*/
 	w.Header().Set("Content-Type", "text/html")
 	w.WriteHeader(201)
 	reqStr, _ := httputil.DumpRequest(r,true)
