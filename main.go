@@ -183,6 +183,7 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.WriteHeader(201)
 	reqStr, _ := httputil.DumpRequest(r,true)
 	w.Write(reqStr)
+	w.Write([]byte(r.FormValue("title")))
 	//w.Write([]byte("<meta http-equiv=\"refresh\" content=\"1; url=http://knightspider.herokuapp.com/#/blog\">successful"))
 }
 
