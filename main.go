@@ -185,11 +185,11 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	r.ParseForm()
-	mode := r.PostFormValue("mode")
-	hellingsgraad := r.PostFormValue("hellingsgraad")
-	snelheid := r.PostFormValue("snelheid")
-	batterij := r.PostFormValue("batterij")
-	balloncount := r.PostFormValue("ballonCount")
+	mode := r.FormValue("mode")
+	hellingsgraad := r.FormValue("hellingsgraad")
+	snelheid := r.FormValue("snelheid")
+	batterij := r.FormValue("batterij")
+	balloncount := r.FormValue("ballonCount")
 	/*_,err := conn.Query("INSERT INTO spindata (tijd, mode, hellingsgraad, snelheid, batterij, balloncount) VALUES ($1, $2, $3, $4, $5, $6)", time.Now(), 
 		mode, hellingsgraad, snelheid, batterij, balloncount)
 	if err != nil {
