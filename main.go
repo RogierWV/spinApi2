@@ -190,20 +190,20 @@ func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 		w.Write([]byte(err.Error()))
 		return
 	}
-	mode := r.FormValue("mode")
-	hellingsgraad := r.FormValue("hellingsgraad")
+	mode := r.PostFormValue("mode")
+	hellingsgraad := r.PostFormValue("hellingsgraad")
 	if hellingsgraad == "" {
 		hellingsgraad = "0"
 	}
-	snelheid := r.FormValue("snelheid")
+	snelheid := r.PostFormValue("snelheid")
 	if snelheid == "" {
 		snelheid = "0"
 	}
-	batterij := r.FormValue("batterij")
+	batterij := r.PostFormValue("batterij")
 	if batterij == "" {
 		batterij = "0"
 	}
-	balloncount := r.FormValue("ballonCount")
+	balloncount := r.PostFormValue("ballonCount")
 	if balloncount == "" {
 		balloncount = "0"
 	}
