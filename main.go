@@ -184,7 +184,6 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	err := r.ParseForm()
 	if err != nil {
 		w.WriteHeader(500)
 		w.Write([]byte(err.Error()))
