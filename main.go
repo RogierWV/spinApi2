@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
-	"net/http/httputil"
 	"log"
 	"os"
 	//"io"
