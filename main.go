@@ -188,7 +188,7 @@ func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 		r.FormValue("mode"), r.FormValue("hellingsgraad"), r.FormValue("snelheid"), r.FormValue("batterij"), r.FormValue("ballonCount"))
 	if err != nil {
 		w.WriteHeader(500)
-		w.Write([]byte(err.Code.Name()))
+		w.Write([]byte(err.Error()))
 		return
 	}
 	w.WriteHeader(201)
