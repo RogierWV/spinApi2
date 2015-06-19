@@ -194,10 +194,10 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 }
 
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	reqStr, _ := httputil.DumpRequest(r, true)
-	w.Write(reqStr)
+	/*reqStr, _ := httputil.DumpRequest(r, true)
+	w.Write(reqStr)*/
 	//r.ParseForm()
-	/*mode := r.FormValue("mode")
+	mode := r.FormValue("mode")
 	hellingsgraad := r.FormValue("hellingsgraad")
 	snelheid := r.FormValue("snelheid")
 	batterij := r.FormValue("batterij")
@@ -209,9 +209,9 @@ func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 		w.Write([]byte(err.Error()))
 		return
 	}
-	w.WriteHeader(201)*/
+	w.WriteHeader(201)
 	//w.Write([]byte(fmt.Sprintf("mode = %s, hellingsgraad = %s, snelheid = %s, batterij = %s, balloncount = %s", mode, hellingsgraad, snelheid, batterij, balloncount)))
-	//w.Write([]byte("successful"))
+	w.Write([]byte("successful"))
 }
 
 func PostServoData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
