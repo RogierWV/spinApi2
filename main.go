@@ -149,6 +149,15 @@ func GetLogs(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	w.Write(buf)
 }
 
+func GetLatestGyroData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	row := conn.QueryRow("SELECT hellingsgraad FROM spindata ORDER BY tijd DESC LIMIT 1")
+	var helling int
+	row.Scan(&helling)
+	buf,_ := json.Marshal(helling)
+	SetHeaders(&w)
+	w.Write(buf)
+}
+
 func Test(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	buf,_ := json.Marshal("test")
 	SetHeaders(&w)
@@ -257,6 +266,7 @@ func main() {
 	router.GET("/spin/latest", GetLatestSpinData)
 	router.GET("/spin/latest/batterij", GetLatestSpinBatterij)
 	router.GET("/spin/latest/mode", GetLatestSpinMode)
+	router.GET("/spin/latest/slope", GetLatestGyroData)
 	router.GET("/spin/archive", GetArchivedSpinData)
 	router.GET("/spin/archive/batterij", GetArchivedSpinBatterij)
 	router.GET("/spin/archive/mode", GetArchivedSpinMode)
