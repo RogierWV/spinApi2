@@ -266,7 +266,7 @@ func main() {
 	router.GET("/spin/latest", GetLatestSpinData)
 	router.GET("/spin/latest/batterij", GetLatestSpinBatterij)
 	router.GET("/spin/latest/mode", GetLatestSpinMode)
-	router.GET("/spin/latest/slope", GetLatestGyroData)
+	router.GET("/spin/latest/helling", GetLatestGyroData)
 	router.GET("/spin/archive", GetArchivedSpinData)
 	router.GET("/spin/archive/batterij", GetArchivedSpinBatterij)
 	router.GET("/spin/archive/mode", GetArchivedSpinMode)
