@@ -196,7 +196,7 @@ func PostBlog(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	/*reqStr, _ := httputil.DumpRequest(r, true)
 	w.Write(reqStr)*/
-	//r.ParseForm()
+	r.ParseForm()
 	mode := r.FormValue("mode")
 	hellingsgraad := r.FormValue("hellingsgraad")
 	snelheid := r.FormValue("snelheid")
