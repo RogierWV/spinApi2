@@ -200,7 +200,7 @@ func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 	//reqStr, _ := httputil.DumpRequest(r, true)
 	//w.Write([]byte(r.FormValue("mode")))
 	r.ParseForm()
-	_,err := conn.Query("INSERT INTO spindata (tijd, mode, hellingsgraad, snelheid, batterij, balloncount) VALUES ($1, $2, $3, $4, $5, $6)", time.Now(), 
+	_,err := conn.Query("INSERT INTO spindata (mode, hellingsgraad, snelheid, batterij, balloncount) VALUES ($1, $2, $3, $4, $5, $6)", 
 		r.FormValue("mode"), r.FormValue("hellingsgraad"), r.FormValue("snelheid"), r.FormValue("batterij"), r.FormValue("ballonCount"))
 	if err != nil {
 		w.WriteHeader(500)
