@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
-	//"net/http/httputil"
+	"net/http/httputil"
 	"log"
 	"os"
 	//"io"
@@ -197,16 +197,16 @@ func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 	// buf := make([]byte,100)
 	// r.Body.Read(buf)
 	// w.Write(buf)
-	//reqStr, _ := httputil.DumpRequest(r, true)
-	//w.Write([]byte(r.FormValue("mode")))
+	reqStr, _ := httputil.DumpRequest(r, true)
+	w.Write(reqStr)
 	r.ParseForm()
 	_,err := conn.Query("INSERT INTO spindata (mode, hellingsgraad, snelheid, batterij, balloncount) VALUES ($1, $2, $3, $4, $5)", 
 		//r.FormValue("mode"), r.FormValue("hellingsgraad"), r.FormValue("snelheid"), r.FormValue("batterij"), r.FormValue("ballonCount"))
 		//"manueel", 0, 300, 50, 0)
 		r.FormValue("mode"),
 		r.FormValue("hellingsgraad"),
-		300,
-		r.FormValue("batterij"),
+		300,50,
+		//r.FormValue("batterij"),
 		r.FormValue("ballonCount"))
 	if err != nil {
 		w.WriteHeader(500)
