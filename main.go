@@ -205,6 +205,7 @@ func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 		//"manueel", 0, 300, 50, 0)
 		r.FormValue("mode"),
 		0,
+		300,
 		50,
 		0)
 	if err != nil {
