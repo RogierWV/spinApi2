@@ -205,9 +205,9 @@ func PostSpinData(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 		//"manueel", 0, 300, 50, 0)
 		r.FormValue("mode"),
 		r.FormValue("hellingsgraad"),
-		r.FormValue("snelheid"),
-		50,
-		0)
+		300,
+		r.FormValue("batterij"),
+		r.FormValue("ballonCount"))
 	if err != nil {
 		w.WriteHeader(500)
 		w.Write([]byte(err.Error()))
