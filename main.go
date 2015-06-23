@@ -246,6 +246,7 @@ func Head(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 func main() {
 	conn,_ = sql.Open("postgres", os.Getenv("DATABASE_URL"))
 	defer conn.Close()
+	conn.SetMaxOpenConns(20)
 
 	es = eventsource.New(
 		&eventsource.Settings{	
